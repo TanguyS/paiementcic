@@ -1,7 +1,7 @@
 ## refactor this
 module PaiementCic::FormHelper
-  def paiement_cic_hidden_fields(order, price, order_transaction, options = {})
-    oa = PaiementCic.config(price, order_transaction.reference)
+  def paiement_cic_hidden_fields(email, price, reference, options = {})
+    oa = PaiementCic.config(price, reference)
 
     oMac = PaiementCic.new
     sDate = Time.now.strftime("%d/%m/%Y:%H:%M:%S")
@@ -25,7 +25,7 @@ module PaiementCic::FormHelper
         <input type="hidden" name="lgue"              id="lgue"           value="' + oa["lgue"] + '" />
         <input type="hidden" name="societe"           id="societe"        value="' + oa["societe"] + '" />
         <input type="hidden" name="texte-libre"       id="texte-libre"    value="' + oa["texte-libre"] + '" />
-        <input type="hidden" name="mail"              id="mail"	          value="''" />'
+        <input type="hidden" name="mail"              id="mail"            value="' + email + '" />'
 
     html.respond_to?(:html_safe) ? html.html_safe : html
   end
